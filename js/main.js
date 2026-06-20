@@ -12,7 +12,7 @@ const initialState = {
   meta: { ticks: 0 }
 };
 
-// bootstrap
+// JSON 読み込み
 async function loadJSON(path) {
   const res = await fetch(path);
   return res.json();
@@ -28,23 +28,30 @@ async function main() {
   const save = new SaveManager();
   const ui = new UI(engine);
 
+  // システム登録
   engine.register('jobSystem', jobSystem);
   engine.register('skillSystem', skillSystem);
   engine.register('ui', ui);
 
-  // load saved state if exists
+  // セーブデータ読み込み
   const loaded = save.load();
   if (loaded) {
     engine.state = Object.assign(engine.state, loaded);
     ui.log('セーブデータを読み込みました');
   }
 
+  // UI 初期化
   ui.init();
 
-  // loop
+  // ★ ここが重要：初期描画を強制する
+  ui.renderJobs();
+  ui.renderSkills();
+  ui.renderPlayer();
+
+  // ループ
   const loop = new Loop(engine);
 
-  // wire buttons
+  // ボタン処理
   document.getElementById('btn-tick').addEventListener('click', () => {
     engine.tick(1);
     ui.renderPlayer();
@@ -74,7 +81,7 @@ async function main() {
     }
   });
 
-  // expose for debugging
+  // デバッグ用
   window.RF = { engine, loop, save, ui };
 }
 
