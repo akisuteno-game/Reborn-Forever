@@ -1,32 +1,35 @@
-// js/save/saveManager.js
-export default class SaveManager {
-  constructor(key = 'reborn_forever_v1') {
-    this.key = key;
+import { CONFIG } from "../config.js";
+
+export class SaveManager {
+  constructor(engine, bus) {
+    this.engine = engine;
+    this.bus = bus;
   }
 
-  save(state) {
-    try {
-      const payload = JSON.stringify(state);
-      localStorage.setItem(this.key, payload);
-      return true;
-    } catch (e) {
-      console.error('Save failed', e);
-      return false;
-    }
+  save() {
+    const payload = {
+      state: this.engine.state,
+      ts: Date.now()
+    };
+    localStorage.setItem(CONFIG.SAVE_KEY, JSON.stringify(payload));
+    this.bus.emit("save:done", payload);
+    alert("セーブしました");
   }
 
   load() {
+    const raw = localStorage.getItem(CONFIG.SAVE_KEY);
+    if (!raw) { alert("セーブデータがありません"); return; }
     try {
-      const raw = localStorage.getItem(this.key);
-      if (!raw) return null;
-      return JSON.parse(raw);
+      const payload = JSON.parse(raw);
+      if (payload.state && payload.state.player) {
+        this.engine.setPlayer(payload.state.player);
+        this.engine.state.time = payload.state.time || 0;
+        this.bus.emit("save:loaded", payload);
+        alert("ロードしました");
+      }
     } catch (e) {
-      console.error('Load failed', e);
-      return null;
+      console.error(e);
+      alert("ロードに失敗しました");
     }
-  }
-
-  clear() {
-    localStorage.removeItem(this.key);
   }
 }
