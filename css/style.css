@@ -13,9 +13,9 @@
 html, body {
   margin:0;
   padding:0;
-  overflow:hidden;     /* ← スクロール禁止 */
+  overflow:hidden;
   height:100%;
-  touch-action:none;   /* ← スワイプ・ピンチ無効 */
+  touch-action:none;
   background:linear-gradient(180deg,#0a0f1c,#0f172a);
   color:var(--text);
   font-family:Inter,system-ui,"Hiragino Kaku Gothic ProN",sans-serif;
@@ -23,7 +23,7 @@ html, body {
 
 .site-header{
   text-align:center;
-  padding:24px 0;
+  padding:20px 0;
 }
 
 #layout{
@@ -33,6 +33,7 @@ html, body {
   max-width:1200px;
   padding:16px;
   gap:16px;
+  margin:0 auto;
 }
 
 #content-area{
@@ -41,10 +42,11 @@ html, body {
 }
 
 #side-tabs{
-  width:160px;
+  width:180px;
   display:flex;
   flex-direction:column;
   gap:8px;
+  align-self:flex-start;
 }
 
 .tab{
@@ -59,12 +61,10 @@ html, body {
   transition:0.15s;
 }
 
-.tab:hover{
-  background:#374151;
-}
+.tab:hover{ background:#374151; }
 
 .tab.active{
-  background:#60a5fa;
+  background:var(--accent);
   color:#0f172a;
 }
 
@@ -74,9 +74,7 @@ html, body {
   overflow:auto;
 }
 
-.tab-content.active{
-  display:block;
-}
+.tab-content.active{ display:block; }
 
 .panel{
   background:var(--panel);
@@ -94,12 +92,7 @@ h2{
   padding-left:8px;
 }
 
-.controls{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
+.controls{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
 
 button{
   background:var(--accent);
@@ -109,12 +102,9 @@ button{
   color:#0f172a;
   font-weight:600;
   cursor:pointer;
-  transition:0.1s;
 }
 
-button:hover{
-  background:var(--accent2);
-}
+button:hover{ background:var(--accent2); }
 
 .log{
   background:var(--panel-light);
@@ -124,19 +114,4 @@ button:hover{
   overflow:auto;
   font-family:monospace;
   font-size:13px;
-}
-
-.job, .skill{
-  background:var(--panel-light);
-  padding:10px;
-  border-radius:8px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:8px;
-}
-
-.small{
-  font-size:12px;
-  color:var(--muted);
 }
