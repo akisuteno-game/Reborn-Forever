@@ -1,88 +1,39 @@
-// js/main.js
-import { Engine } from './core/engine.js';
-import { Loop } from './core/loop.js';
-import JobSystem from './systems/jobSystem.js';
-import SkillSystem from './systems/skillSystem.js';
-import SaveManager from './save/saveManager.js';
-import UI from './ui/ui.js';
+import { createTabs } from "./modules/tabs/tabUI.js";
+import { TabManager } from "./modules/tabs/tabManager.js";
+import { Engine } from "./core/engine.js";
+import { Loop } from "./core/loop.js";
+import { EventBus } from "./core/eventBus.js";
+import { UIManager } from "./ui/uiManager.js";
+import { PlayerManager } from "./systems/player/playerManager.js";
+import { SaveManager } from "./save/saveManager.js";
 
-// 初期 state
-const initialState = {
-  player: { name: '名無し', level: 1, exp: 0, gold: 0 },
-  meta: { ticks: 0 }
-};
+async function bootstrap() {
+  // 初期設定読み込み（将来拡張）
+  // create tabs
+  createTabs(document.getElementById("side-tabs"));
 
-// JSON 読み込み
-async function loadJSON(path) {
-  const res = await fetch(path);
-  return res.json();
-}
+  // tab manager
+  const tabs = new TabManager();
+  tabs.init();
 
-async function main() {
-  const jobs = await loadJSON('data/jobs.json');
-  const skills = await loadJSON('data/skills.json');
-
-  const engine = new Engine(JSON.parse(JSON.stringify(initialState)));
-  const jobSystem = new JobSystem(jobs);
-  const skillSystem = new SkillSystem(skills);
-  const save = new SaveManager();
-  const ui = new UI(engine);
-
-  // システム登録
-  engine.register('jobSystem', jobSystem);
-  engine.register('skillSystem', skillSystem);
-  engine.register('ui', ui);
-
-  // セーブデータ読み込み
-  const loaded = save.load();
-  if (loaded) {
-    engine.state = Object.assign(engine.state, loaded);
-    ui.log('セーブデータを読み込みました');
-  }
-
-  // UI 初期化
-  ui.init();
-
-  // ★ 初期描画を強制
-  ui.renderJobs();
-  ui.renderSkills();
-  ui.renderPlayer();
-
-  // ループ
+  // core
+  const bus = new EventBus();
+  const engine = new Engine(bus);
   const loop = new Loop(engine);
 
-  // ボタン処理
-  document.getElementById('btn-tick').addEventListener('click', () => {
-    engine.tick(1);
-    ui.renderPlayer();
-  });
+  // systems
+  const player = new PlayerManager(engine, bus);
+  const save = new SaveManager(engine, bus);
 
-  document.getElementById('btn-auto').addEventListener('click', (e) => {
-    loop.toggle();
-    e.target.textContent = loop.running ? '自動停止' : '自動開始';
-    ui.log(loop.running ? '自動開始' : '自動停止');
-  });
+  // ui
+  const ui = new UIManager(engine, bus, { player, save, tabs });
+  ui.init();
 
-  document.getElementById('btn-save').addEventListener('click', () => {
-    save.save(engine.state);
-    ui.log('セーブしました');
-  });
+  // expose for dev
+  window.RF = { engine, loop, bus, player, save, ui, tabs };
 
-  document.getElementById('btn-load').addEventListener('click', () => {
-    const s = save.load();
-    if (s) {
-      engine.state = Object.assign(engine.state, s);
-      ui.renderPlayer();
-      ui.renderJobs();
-      ui.renderSkills();
-      ui.log('ロードしました');
-    } else {
-      ui.log('セーブが見つかりません'); 
-    }
-  });
-
-  // デバッグ用
-  window.RF = { engine, loop, save, ui };
+  // start loop (paused by default)
+  loop.start();
 }
 
-main().catch(e => console.error(e));
+bootstrap();
