@@ -1,0 +1,4 @@
+[
+  { "id": "farming", "name": "農業の心得", "description": "農民の収入が10%増加", "targetJob": "peasant", "multiplier": 1.1, "cost": 10 },
+  { "id": "training", "name": "訓練", "description": "全職業の経験値獲得が5%増加", "targetJob": null, "multiplier": 1.05, "cost": 25 }
+]
