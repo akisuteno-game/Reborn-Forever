@@ -1,0 +1,5 @@
+[
+  { "id": "peasant", "name": "農民", "baseIncome": 1, "expGain": 1, "unlockAtLevel": 1 },
+  { "id": "soldier", "name": "兵士", "baseIncome": 5, "expGain": 3, "unlockAtLevel": 3 },
+  { "id": "merchant", "name": "商人", "baseIncome": 12, "expGain": 6, "unlockAtLevel": 6 }
+]
