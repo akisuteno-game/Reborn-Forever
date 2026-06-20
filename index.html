@@ -12,49 +12,54 @@
     <p class="tagline">Prototype — 開発中</p>
   </header>
 
-  <!-- ▼ タブメニュー -->
-  <nav class="tabs">
-    <button class="tab active" data-tab="player">プレイヤー</button>
-    <button class="tab" data-tab="jobs">職業</button>
-    <button class="tab" data-tab="skills">スキル</button>
-    <button class="tab" data-tab="log">ログ</button>
-  </nav>
+  <main id="layout">
 
-  <main id="app">
+    <!-- ▼ メインコンテンツ -->
+    <div id="content-area">
 
-    <!-- ▼ プレイヤータブ -->
-    <section id="tab-player" class="tab-content active panel">
-      <h2>プレイヤー</h2>
-      <div>名前: <span id="player-name">名無し</span></div>
-      <div>レベル: <span id="player-level">1</span></div>
-      <div>経験値: <span id="player-xp">0</span></div>
-      <div>ゴールド: <span id="player-gold">0</span></div>
+      <!-- ▼ プレイヤータブ -->
+      <section id="tab-player" class="tab-content active panel">
+        <h2>プレイヤー</h2>
+        <div>名前: <span id="player-name">名無し</span></div>
+        <div>レベル: <span id="player-level">1</span></div>
+        <div>経験値: <span id="player-xp">0</span></div>
+        <div>ゴールド: <span id="player-gold">0</span></div>
 
-      <div class="controls">
-        <button id="btn-tick">Tick</button>
-        <button id="btn-auto">自動開始</button>
-        <button id="btn-save">セーブ</button>
-        <button id="btn-load">ロード</button>
-      </div>
-    </section>
+        <div class="controls">
+          <button id="btn-tick">Tick</button>
+          <button id="btn-auto">自動開始</button>
+          <button id="btn-save">セーブ</button>
+          <button id="btn-load">ロード</button>
+        </div>
+      </section>
 
-    <!-- ▼ 職業タブ -->
-    <section id="tab-jobs" class="tab-content panel">
-      <h2>職業</h2>
-      <div id="job-list"></div>
-    </section>
+      <!-- ▼ 職業タブ -->
+      <section id="tab-jobs" class="tab-content panel">
+        <h2>職業</h2>
+        <div id="job-list"></div>
+      </section>
 
-    <!-- ▼ スキルタブ -->
-    <section id="tab-skills" class="tab-content panel">
-      <h2>スキル</h2>
-      <div id="skill-list"></div>
-    </section>
+      <!-- ▼ スキルタブ -->
+      <section id="tab-skills" class="tab-content panel">
+        <h2>スキル</h2>
+        <div id="skill-list"></div>
+      </section>
 
-    <!-- ▼ ログタブ -->
-    <section id="tab-log" class="tab-content panel">
-      <h2>ログ</h2>
-      <div id="log" class="log"></div>
-    </section>
+      <!-- ▼ ログタブ -->
+      <section id="tab-log" class="tab-content panel">
+        <h2>ログ</h2>
+        <div id="log" class="log"></div>
+      </section>
+
+    </div>
+
+    <!-- ▼ 右側タブ -->
+    <nav id="side-tabs">
+      <button class="tab active" data-tab="player">プレイヤー</button>
+      <button class="tab" data-tab="jobs">職業</button>
+      <button class="tab" data-tab="skills">スキル</button>
+      <button class="tab" data-tab="log">ログ</button>
+    </nav>
 
   </main>
 
