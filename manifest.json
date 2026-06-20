@@ -1,0 +1,8 @@
+{
+  "name": "Reborn Forever",
+  "short_name": "Reborn",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0f1c",
+  "theme_color": "#0f172a"
+}
