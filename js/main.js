@@ -77,7 +77,7 @@ async function main() {
       ui.renderSkills();
       ui.log('ロードしました');
     } else {
-      ui.log('セーブが見つかりません');
+      ui.log('セーブが見つかりません'); 
     }
   });
 
