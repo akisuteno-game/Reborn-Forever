@@ -10,15 +10,15 @@
 
 *{box-sizing:border-box}
 
-body{
+html, body {
   margin:0;
-  font-family:Inter,system-ui,"Hiragino Kaku Gothic ProN",sans-serif;
+  padding:0;
+  overflow:hidden;     /* ← スクロール禁止 */
+  height:100%;
+  touch-action:none;   /* ← スワイプ・ピンチ無効 */
   background:linear-gradient(180deg,#0a0f1c,#0f172a);
   color:var(--text);
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  font-family:Inter,system-ui,"Hiragino Kaku Gothic ProN",sans-serif;
 }
 
 .site-header{
@@ -29,17 +29,17 @@ body{
 #layout{
   display:flex;
   width:100%;
+  height:calc(100% - 120px);
   max-width:1200px;
   padding:16px;
   gap:16px;
 }
 
-/* ▼ メインコンテンツ */
 #content-area{
   flex:1;
+  overflow:hidden;
 }
 
-/* ▼ 右側タブ */
 #side-tabs{
   width:160px;
   display:flex;
@@ -68,22 +68,23 @@ body{
   color:#0f172a;
 }
 
-/* ▼ タブコンテンツ */
 .tab-content{
   display:none;
+  height:100%;
+  overflow:auto;
 }
 
 .tab-content.active{
   display:block;
 }
 
-/* ▼ パネル */
 .panel{
   background:var(--panel);
   padding:16px;
   border-radius:12px;
   box-shadow:0 4px 20px rgba(0,0,0,0.4);
-  margin-bottom:16px;
+  height:100%;
+  overflow:auto;
 }
 
 h2{
