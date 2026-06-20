@@ -1,10 +1,10 @@
 // js/main.js
-import { Engine } from './js/core/engine.js';
-import { Loop } from './js/core/loop.js';
-import JobSystem from './js/systems/jobSystem.js';
-import SkillSystem from './js/systems/skillSystem.js';
-import SaveManager from './js/save/saveManager.js';
-import UI from './js/ui/ui.js';
+import { Engine } from './core/engine.js';
+import { Loop } from './core/loop.js';
+import JobSystem from './systems/jobSystem.js';
+import SkillSystem from './systems/skillSystem.js';
+import SaveManager from './save/saveManager.js';
+import UI from './ui/ui.js';
 
 // 初期 state
 const initialState = {
@@ -43,7 +43,7 @@ async function main() {
   // UI 初期化
   ui.init();
 
-  // ★ ここが重要：初期描画を強制する
+  // ★ 初期描画を強制
   ui.renderJobs();
   ui.renderSkills();
   ui.renderPlayer();
