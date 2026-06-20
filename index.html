@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reborn Forever</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Reborn Forever</h1>
+    <p class="tagline">Prototype — 開発中</p>
+  </header>
+
+  <main id="app">
+    <section id="left" class="panel">
+      <h2>プレイヤー</h2>
+      <div>名前: <span id="player-name">名無し</span></div>
+      <div>レベル: <span id="player-level">1</span></div>
+      <div>経験値: <span id="player-xp">0</span></div>
+      <div>ゴールド: <span id="player-gold">0</span></div>
+
+      <div class="controls">
+        <button id="btn-tick">Tick</button>
+        <button id="btn-auto">自動開始</button>
+        <button id="btn-save">セーブ</button>
+        <button id="btn-load">ロード</button>
+      </div>
+    </section>
+
+    <section id="right" class="panel">
+      <h2>職業</h2>
+      <div id="job-list"></div>
+
+      <h2>スキル</h2>
+      <div id="skill-list"></div>
+
+      <h2>ログ</h2>
+      <div id="log" class="log"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>Reborn Forever — Prototype</small>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
