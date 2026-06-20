@@ -1,27 +1,22 @@
-// js/core/loop.js
+import { CONFIG } from "../config.js";
+
 export class Loop {
   constructor(engine) {
     this.engine = engine;
-    this.running = false;
     this.interval = null;
-    this.tickMs = 1000; // 1秒ごと
+    this.running = false;
   }
 
   start() {
     if (this.running) return;
     this.running = true;
-    this.interval = setInterval(() => {
-      this.engine.tick(1);
-    }, this.tickMs);
+    this.interval = setInterval(() => this.engine.tick(), CONFIG.TICK_INTERVAL_MS);
   }
 
   stop() {
-    this.running = false;
-    if (this.interval) clearInterval(this.interval);
+    if (!this.running) return;
+    clearInterval(this.interval);
     this.interval = null;
-  }
-
-  toggle() {
-    this.running ? this.stop() : this.start();
+    this.running = false;
   }
 }
